@@ -1,5 +1,5 @@
  import React, { useState } from 'react'
- import
+ import axios from "axios"
  
  function Auth() {
    return (
@@ -9,12 +9,12 @@
      </div>
    )
  }
-
+ // Login useState
  const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-
+// return destructured form
   return (
   
     <Form 
@@ -27,19 +27,29 @@
   )     
 };
 
+// Register usestate
 const Register = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
 const onSubmit = async (event) => {
     event.preventDefault();
+    try {
+      await axios.post("http://localhost:3001/auth/register", {
+        username,
+        password,
+      });
+      alert("Registration Completed! Now login.");
+    } catch (err) {
+      //console.error(err) will make the text red
+      console.error(err);  
+    }
+};
 
-
-}
   return (
   <Form 
   username={username} 
-  setUsernameetUsername={setUsername} 
+  setUsername={setUsername} 
   password={password} 
   setPassword={setPassword}
   label= "Register"
@@ -48,7 +58,7 @@ const onSubmit = async (event) => {
   )
 };
 
-
+// destructure the form
 const Form = ({username, setUsername, password, setPassword, label, onSubmit,}) => {
   return (
     
@@ -67,7 +77,7 @@ const Form = ({username, setUsername, password, setPassword, label, onSubmit,}) 
               <div className='form-group'>
                 <label htmlFor='password'> Password: </label>
                   <input 
-                  type='text' 
+                  type='password' 
                   id='password'
                   value={password} 
                   onChange={(event) => setPassword(event.target.value)} />
