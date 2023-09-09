@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import {userRouter} from './routes/users.js'
+import {recipesRouter} from './routes/recipes.js'
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/auth', userRouter)
+app.use('/recipes', recipesRouter)
 
 mongoose.connect("mongodb+srv://sterlingduncan9:Sesshomaru9@recipes.0slpbmc.mongodb.net/recipes?retryWrites=true&w=majority")
 
