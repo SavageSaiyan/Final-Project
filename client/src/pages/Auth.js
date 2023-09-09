@@ -1,4 +1,5 @@
  import React, { useState } from 'react'
+ import
  
  function Auth() {
    return (
@@ -16,29 +17,13 @@
 
   return (
   
-  <div className='auth-container'>
-            <form>
-              <h2> Regiser </h2>
-              <div className='form-group'>
-                <label htmlFor='username'> Username: </label>
-                  <input 
-                  type='text' 
-                  id='username' 
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)} />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='password'> Password: </label>
-                  <input 
-                  type='text' 
-                  id='password'
-                  value={password} 
-                  onChange={(event) => setPassword(event.target.value)} />
-              </div>
-
-              <button type='submit'>Register</button>
-            </form>
-        </div>
+    <Form 
+    username={username} 
+    setUsername={setUsername} 
+    password={password} 
+    setPassword={setPassword}
+    label= "Login"
+    />
   )     
 };
 
@@ -46,19 +31,31 @@ const Register = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
+const onSubmit = async (event) => {
+    event.preventDefault();
 
-  return <F
 
+}
+  return (
+  <Form 
+  username={username} 
+  setUsernameetUsername={setUsername} 
+  password={password} 
+  setPassword={setPassword}
+  label= "Register"
+  onSubmit={onSubmit}
+  />
+  )
 };
 
 
-const Form = ({username, setUsername, password, setPassword}) => {
+const Form = ({username, setUsername, password, setPassword, label, onSubmit,}) => {
   return (
     
   
   <div className='auth-container'>
-            <form>
-              <h2> Regiser </h2>
+            <form onSubmit={onSubmit}>
+              <h2> {label} </h2>
               <div className='form-group'>
                 <label htmlFor='username'> Username: </label>
                   <input 
@@ -76,7 +73,7 @@ const Form = ({username, setUsername, password, setPassword}) => {
                   onChange={(event) => setPassword(event.target.value)} />
               </div>
 
-              <button type='submit'>Register</button>
+              <button type='submit'>{label}</button>
             </form>
         </div>
     
