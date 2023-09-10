@@ -23,14 +23,16 @@ function Home() {
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/recipes");
-          setRecipes(response.data)
+          `http://localhost:3001/recipes/savedRecipes/ids/${userID}`
+          );
+          setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
         console.error(err);
       }
     };
 
     fetchRecipe();
+    fetchSavedRecipe();
   }, []);
 
   const saveRecipe = async (recipeID) => {
@@ -53,6 +55,7 @@ function Home() {
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe._id}>
+            {savedRecipes.includes(recipe._id) && <h1>ALREADY SAVED</h1>}
             <div>
               <h2>{recipe.name}</h2>
               {/* button to save recipe */}
