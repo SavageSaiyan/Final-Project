@@ -2,10 +2,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from 'axios';
 import {useGetUserID} from '../hooks/useGetUserID'
+import {useCookies} from 'react-cookie'
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
+  const [cookies, _] = useCookies(["access_token"])
+
 
   const userID = useGetUserID();
   useEffect(() => {
@@ -41,7 +44,8 @@ function Home() {
         "http://localhost:3001/recipes", {
           recipeID, 
           userID,
-        });
+        }, 
+        {headers: {authorization: cookies.access_token}}); // set up authentication for saving recipes
       setSavedRecipes(response.data.savedRecipes)
     } catch (err) {
       console.error(err);
