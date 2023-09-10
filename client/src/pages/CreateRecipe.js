@@ -15,6 +15,10 @@
     const {name, value} = event.target;
     setRecipe({...recipe, [name]: value});
   };
+//set recipe object to be the same as it was before , but change the ingredients field
+  const addIngredient = () => {
+    setRecipe({...recipe, ingredients: [...recipe.ingredients, ""]})
+  }
 
    return (
      <div className='create-recipe'> 
@@ -23,7 +27,7 @@
       <label htmlFor='name'> Name</label>
       <input type='text' id='name' name='name' onChange={handleChange} />
       <label htmlFor='ingredients'>Ingredients</label>
-
+      <button onClick={addIngredient}>Add Ingredient</button>
       <label htmlFor='instructions'>Instructions</label>
       <textarea 
       id='instructions' 
