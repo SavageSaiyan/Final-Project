@@ -48,6 +48,7 @@ function Home() {
     }
   }
 
+  const isRecipeSaved = (id) => savedRecipes.includes(id);
 
   return (
   <div>
@@ -55,11 +56,11 @@ function Home() {
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe._id}>
-            {savedRecipes.includes(recipe._id) && <h1>ALREADY SAVED</h1>}
             <div>
               <h2>{recipe.name}</h2>
               {/* button to save recipe */}
-              <button onClick={() => saveRecipe(recipe._id)}>Save</button>
+              <button onClick={() => saveRecipe(recipe._id)} 
+              disabled={isRecipeSaved(recipe._id)}>Save</button>
             </div>
             <div className="instructions">
               <p> {recipe.instructions}</p>
