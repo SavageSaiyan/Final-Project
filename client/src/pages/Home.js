@@ -42,7 +42,7 @@ function Home() {
           recipeID, 
           userID,
         });
-        console.log(response);
+      setSavedRecipes(response.data.savedRecipes)
     } catch (err) {
       console.error(err);
     }
@@ -59,8 +59,13 @@ function Home() {
             <div>
               <h2>{recipe.name}</h2>
               {/* button to save recipe */}
-              <button onClick={() => saveRecipe(recipe._id)} 
-              disabled={isRecipeSaved(recipe._id)}>Save</button>
+              <button 
+              onClick={() => saveRecipe(recipe._id)} 
+              disabled={isRecipeSaved(recipe._id)}
+              >
+                
+                {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
+                </button>
             </div>
             <div className="instructions">
               <p> {recipe.instructions}</p>
