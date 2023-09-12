@@ -57,7 +57,7 @@ function Home() {
 
   return (
   <div>
-      <h1> Recipes</h1>
+      <h1> Sharing Recipes</h1>
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe._id}>

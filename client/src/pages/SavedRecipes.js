@@ -4,220 +4,141 @@ import axios from 'axios';
 import {useGetUserID} from '../hooks/useGetUserID'
 
 
-function SavedRecipes() {
-  const [savedRecipes, setSavedRecipes] = useState([]);
-  const userID = useGetUserID();
 
-  useEffect(() => {
-    const fetchSavedRecipe = async () => {
+// VERSION 5 (has both delete and edit buttons working just not as intended. WORKING)
+
+function SavedRecipes() {
+    const [savedRecipes, setSavedRecipes] = useState([]);
+    const [editingRecipe, setEditingRecipe] = useState(null);
+    const [editedRecipe, setEditedRecipe] = useState({}); // State to store edited recipe details
+    const userID = useGetUserID();
+  
+    useEffect(() => {
+      const fetchSavedRecipe = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/recipes/savedRecipes/${userID}`
+          );
+          setSavedRecipes(response.data.savedRecipes);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+  
+      fetchSavedRecipe();
+    }, [userID]);
+  
+    const handleDelete = async (recipeID) => {
       try {
-        const response = await axios.get(
-          `http://localhost:3001/recipes/savedRecipes/${userID}`
+        await axios.delete(`http://localhost:3001/recipes/savedRecipes/${userID}/${recipeID}`, {
+          data: { userID }, // Send the userID in the request body
+        });
+        // After successful deletion, update the savedRecipes state by filtering out the deleted recipe
+        setSavedRecipes((prevRecipes) =>
+          prevRecipes.filter((recipe) => recipe._id !== recipeID)
         );
-        setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
         console.error(err);
       }
     };
-
-    fetchSavedRecipe();
-  }, [userID]);
-// add edit recipe functionality 
-  const toggleEdit = (recipe) => {
-    // Toggle the isEditing property for the given recipe
-    recipe.isEditing = !recipe.isEditing;
-    setSavedRecipes([...savedRecipes]); // Trigger re-render
-  };
-// save recipe edits 
-  const saveChanges = async (recipe) => {
-    try {
-      const response = await axios.put(
-        `http://localhost:3001/recipes/${recipe._id}`,
-        recipe
-      );
-      // Assuming your server returns the updated recipe, you can update it in the state
-      const updatedRecipe = response.data;
-      const index = savedRecipes.findIndex((r) => r._id === updatedRecipe._id);
-      if (index !== -1) {
-        savedRecipes[index] = updatedRecipe;
-        setSavedRecipes([...savedRecipes]);
-        toggleEdit(updatedRecipe); // Exit edit mode
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  return (
-    <div>
-      <h1> Saved Recipes</h1>
-      <ul>
-        {savedRecipes.map((recipe) => (
-          <li key={recipe._id}>
-            <div>
-            {recipe.isEditing ? (
-  // Edit mode: render editable fields
-  <>
-    <input
-      type="text"
-      value={recipe.name}
-      onChange={(e) => (recipe.name = e.target.value)}
-    />
-    <textarea
-      value={recipe.instructions}
-      onChange={(e) => (recipe.instructions = e.target.value)}
-    />
-    <input
-      type="text"
-      value={recipe.imageUrl}
-      onChange={(e) => (recipe.imageUrl = e.target.value)}
-    />
-    <input
-      type="number"
-      value={recipe.cookingTime}
-      onChange={(e) => (recipe.cookingTime = e.target.value)}
-    />
-    {/* Input fields for ingredients */}
-    {recipe.ingredients.map((ingredient, idx) => (
-      <input
-        key={idx}
-        type="text"
-        value={ingredient}
-        onChange={(e) =>
-          (recipe.ingredients[idx] = e.target.value)
-        }
-      />
-    ))}
-    <button onClick={() => saveChanges(recipe)}>Save</button>
-  </>
-) : (
-  // Display mode: recipe details
-  <>
-    <h2>{recipe.name}</h2>
-    <p>{recipe.instructions}</p>
-    <img src={recipe.imageUrl} alt={recipe.name} />
-    <p>Cooking Time: {recipe.cookingTime} (minutes)</p>
-    {/* Display ingredients */}
-    <ul>
-      {recipe.ingredients.map((ingredient, idx) => (
-        <li key={idx}>{ingredient}</li>
-      ))}
-    </ul>
-    <button onClick={() => toggleEdit(recipe)}>Edit</button>
-  </>
-)}
-
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-
-
-
-
-
-
-
-
-
-
-// function SavedRecipes() {
-//   const [savedRecipes, setSavedRecipes] = useState([]);
-//   const userID = useGetUserID();
-
-//   useEffect(() => {
-//     const fetchSavedRecipe = async () => {
-//       try {
-//         const response = await axios.get(
-//           `http://localhost:3001/recipes/savedRecipes/${userID}`
-//         );
-//         setSavedRecipes(response.data.savedRecipes);
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     };
-
-//     fetchSavedRecipe();
-//   }, [userID]); // Make sure to include userID in the dependency array
-
-//   return (
-//     <div>
-//       <h1> Saved Recipes</h1>
-//       <ul>
-//         {savedRecipes && savedRecipes.map((recipe) => (
-//           <li key={recipe._id}>
-//             <div>
-//               <h2>{recipe.name}</h2>
-//             </div>
-//             <div className="instructions">
-//               <p> {recipe.instructions}</p>
-//             </div>
-//             <img src={recipe.imageUrl} alt={recipe.name} />
-//             <p> Cooking Time: {recipe.cookingTime} (minutes)</p>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-// function SavedRecipes() {
-//   const [savedRecipes, setSavedRecipes] = useState([]);
-//   const userID = useGetUserID();
-
-//   useEffect(() => {
-
-
-
-//     const fetchSavedRecipe = async () => {
-//       try {
-//         const response = await axios.get(
-//           `http://localhost:3001/recipes/savedRecipes/${userID}`
-//           );
-//           setSavedRecipes(response.data.savedRecipes);
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     };
-
   
-//     fetchSavedRecipe();
-//   }, []);
+    const handleEdit = (recipe) => {
+      setEditingRecipe(recipe);
+      setEditedRecipe({ ...recipe }); // Initialize the edited recipe details with the current recipe
+    };
+  
+    const handleSaveEdit = async () => {
+      try {
+        // Send a PUT request to update the recipe details
+        await axios.put(`http://localhost:3001/recipes/${editingRecipe._id}`, editedRecipe);
+  
+        // Update the savedRecipes state to reflect the changes
+        setSavedRecipes((prevRecipes) =>
+          prevRecipes.map((recipe) =>
+            recipe._id === editingRecipe._id ? editedRecipe : recipe
+          )
+        );
+  
+        // Reset the editing state
+        setEditingRecipe(null);
+        setEditedRecipe({});
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    return (
+      <div>
+        <h1>Saved Recipes</h1>
+        <ul>
+          {savedRecipes &&
+            savedRecipes.map((recipe) => (
+              <li key={recipe._id}>
+                <div>
+                  {editingRecipe === recipe ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editedRecipe.name}
+                        onChange={(e) =>
+                          setEditedRecipe({ ...editedRecipe, name: e.target.value })
+                        }
+                        placeholder="Recipe Name"
+                      />
+                      <input
+                        type="text"
+                        value={editedRecipe.instructions}
+                        onChange={(e) =>
+                          setEditedRecipe({ ...editedRecipe, instructions: e.target.value })
+                        }
+                        placeholder="Instructions"
+                      />
+                      <input
+                        type="text"
+                        value={editedRecipe.imageUrl}
+                        onChange={(e) =>
+                          setEditedRecipe({ ...editedRecipe, imageUrl: e.target.value })
+                        }
+                        placeholder="Image URL"
+                      />
+                      <input
+                        type="number"
+                        value={editedRecipe.cookingTime}
+                        onChange={(e) =>
+                          setEditedRecipe({ ...editedRecipe, cookingTime: e.target.value })
+                        }
+                        placeholder="Cooking Time (minutes)"
+                      />
+                      {/* Add more input fields for other recipe properties as needed */}
+                      <button onClick={handleSaveEdit}>Save</button>
+                    </>
+                  ) : (
+                    <>
+                      <h2>{recipe.name}</h2>
+                      <button onClick={() => handleEdit(recipe)}>Edit</button>
+                      <button onClick={() => handleDelete(recipe._id)}>Delete</button>
+                    </>
+                  )}
+                </div>
+                <div className="instructions">
+                  <p>{recipe.instructions}</p>
+                </div>
+                <img src={recipe.imageUrl} alt={recipe.name} />
+                <p>Cooking Time: {recipe.cookingTime} (minutes)</p>
+              </li>
+            ))}
+        </ul>
+      </div>
+    );
+  }
 
 
-//   return (
-//   <div>
-//       <h1> Saved Recipes</h1>
-//       <ul>
-//         {savedRecipes.map((recipe) => (
-//           <li key={recipe._id}>
-//             <div>
-//               <h2>{recipe.name}</h2>
-//             </div>
-//             <div className="instructions">
-//               <p> {recipe.instructions}</p>
-//             </div>
-//             <img src={recipe.imageUrl} alt={recipe.name} />
-//             <p> Cooking Time: {recipe.cookingTime} (minutes)</p>
-//           </li>
-//         ))}
-//       </ul>
-//   </div>
-//   );
-// };
+
+
+
+
+
+
+
 
 export default SavedRecipes;
