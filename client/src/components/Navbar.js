@@ -22,7 +22,7 @@ function Navbar() {
         ) : (  
         <>
         <Link to="/saved-recipes">Saved Recipes</Link>
-        <button onClick={logout}> Logout</button> 
+        <button className='button-animation button-color2' onClick={logout}> Logout</button> 
         </>
         )}
     </div>

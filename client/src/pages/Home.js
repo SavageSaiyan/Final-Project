@@ -65,6 +65,7 @@ function Home() {
               <h2>{recipe.name}</h2>
               {/* button to save recipe */}
               <button 
+              className="button-animation button-color"
               onClick={() => saveRecipe(recipe._id)} 
               disabled={isRecipeSaved(recipe._id)}
               >

@@ -110,13 +110,13 @@ function SavedRecipes() {
                         placeholder="Cooking Time (minutes)"
                       />
                       {/* Add more input fields for other recipe properties as needed */}
-                      <button onClick={handleSaveEdit}>Save</button>
+                      <button  onClick={handleSaveEdit}>Save</button>
                     </>
                   ) : (
                     <>
                       <h2>{recipe.name}</h2>
-                      <button onClick={() => handleEdit(recipe)}>Edit</button>
-                      <button onClick={() => handleDelete(recipe._id)}>Delete</button>
+                      <button className="button-animation button-color" onClick={() => handleEdit(recipe)}>Edit</button>
+                      <button className="button-animation button-color" onClick={() => handleDelete(recipe._id)}>Delete</button>
                     </>
                   )}
                 </div>

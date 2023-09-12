@@ -52,6 +52,19 @@ input {
   border-radius: 5px;
 }
 
+/* Navbar animation */
+/* Keyframes for fading animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
 .navbar {
   margin: 0;
   width: 100%;
@@ -62,7 +75,43 @@ input {
   align-items: center;
   color: white;
   text-decoration: none;
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0; /* Initial opacity set to 0 */
 }
+
+.button-color {
+  border-radius: 9999px; /* Use a high value for a rounded effect */
+  background-color: white;
+  color: black; /* Optionally, change the text color to black or another color of your choice */
+  padding: 10px 20px; /* Adjust padding as needed */
+  text-decoration: none; /* Remove underline from anchor tags, if needed */
+  cursor: pointer; /* Add pointer cursor for better usability */
+  transition: background-color 0.3s ease; /* Add a smooth transition for background color */
+  color: orange;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.button-color2 {
+  border-radius: 9999px; /* Use a high value for a rounded effect */
+  background-color: white;
+  color: black; /* Optionally, change the text color to black or another color of your choice */
+  padding: 10px 20px; /* Adjust padding as needed */
+  text-decoration: none; /* Remove underline from anchor tags, if needed */
+  cursor: pointer; /* Add pointer cursor for better usability */
+  transition: background-color 0.3s ease; /* Add a smooth transition for background color */
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.button-color:hover {
+  background-color: lightgreen; /* Change background color on hover */
+}
+
+
+
+
 
 a {
   color: white;
@@ -133,3 +182,54 @@ h1 {
   font-size: 54px;
   font-family:'Jasmine And Greentea';
 }
+
+
+
+/* ANIMATIONS */
+
+
+/* Add the following CSS to your app.css */
+
+/* Keyframes for sliding animation */
+@keyframes slideFromLeft {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* Apply the animation to elements with class "button-animation" */
+.button-animation {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+/* Add a background gradient for the sliding animation */
+.button-animation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #64dd17,
+    #28a745
+  ); /* Adjust gradient colors as needed */
+  transition: transform 0.5s, opacity 0.3s;
+  transform: translateX(-100%); /* Initial position outside the button */
+  background-color: transparent; /* Set initial background color to transparent */
+  opacity: 0; /* Initial opacity set to 0 */
+}
+
+/* Apply the sliding animation and reveal the gradient on hover */
+.button-animation:hover::before {
+  animation: slideFromLeft 1s linear forwards;
+  transform: translateX(100%);
+  opacity: 1; /* Set opacity to reveal the gradient */
+}
+
