@@ -87,18 +87,26 @@ a {
   display: flex;
   flex-direction: column;
 }
+/* Update the styles for the list items */
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  gap: 10px; /* Add gap between items */
 }
 
 li {
-  border: 1px solid black;
+  border: 4px solid black;
+  border-radius: 5%;
   padding: 10px;
-  margin-bottom: 10px;
- 
+  flex: 1;
+  max-width: 100%; /* Allow each item to take the full column width */
+  box-sizing: border-box;
+  background-color: white;
 }
+
 
 h2 {
   margin-top: 0;
@@ -121,5 +129,7 @@ p {
 }
 
 h1 {
-  font-family:'Jasmine And Greentea'
+  text-align: center;
+  font-size: 54px;
+  font-family:'Jasmine And Greentea';
 }
