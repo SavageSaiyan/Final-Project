@@ -68,8 +68,10 @@ function SavedRecipes() {
     };
   
     return (
+      <>
+      <h1 className="sharingRecipes">Saved Recipes</h1>
       <div>
-        <h1>Saved Recipes</h1>
+        
         <ul>
           {savedRecipes &&
             savedRecipes.map((recipe) => (
@@ -129,6 +131,7 @@ function SavedRecipes() {
             ))}
         </ul>
       </div>
+      </>
     );
   }
 
