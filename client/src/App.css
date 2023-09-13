@@ -12,6 +12,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: rgb(253, 209, 128);
+  background-image: url('https://media.istockphoto.com/id/1312307362/photo/culinary-border-of-rosemary-salt-pepper-and-oil.jpg?s=612x612&w=0&k=20&c=EijUZMMofisUyhpiigozGbMKZMJXT55y11VcpiVcJnI=');
+ 
 }
 
 
@@ -237,7 +239,7 @@ h1 {
 
 
 .sharingRecipes {
-background-color: #64dd17;
+background-color: rgba(255,255,255,0.5);
 width: 100%;
 padding: 10px;
 }
