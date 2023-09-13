@@ -99,6 +99,48 @@ router.put('/:recipeID', async (req, res) => {
   }
 });
 
+
+//delete request
+// DELETE request to delete a recipe by ID
+router.delete('/savedRecipes/:userID/:recipeID', async (req, res) => {
+  try {
+    const { recipeID } = req.params;
+
+    // Check if the recipe exists
+    console.log(`Attempting to delete recipe with ID: ${recipeID}`);
+    const foundRecipe = await RecipeModel.findById(recipeID);
+    console.log(foundRecipe)
+
+
+    
+
+    if (!foundRecipe) {
+      console.log(`Recipe with ID ${recipeID} not found`);
+      return res.status(404).json({ message: 'Recipe not found' });
+    }
+    //const deletedRecipe = await RecipeModel.findByIdAndDelete(recipeID);
+
+    // Remove the deleted recipe from the user's saved recipes
+    //const userID = deletedRecipe.userOwner;
+
+    const {userID} = req.params;
+    const user = await UserModel.findById(userID);
+
+    if (user) {
+      console.log(`Removing recipe with ID ${recipeID} from user's saved recipes`);
+      user.savedRecipes.pull(recipeID);
+      await user.save();
+      console.log(`Recipe removed from user's saved recipes`);
+    }
+
+    console.log(`Recipe with ID ${recipeID} deleted successfully`);
+    res.status(200).json({ message: 'Recipe deleted successfully' });
+  } catch (err) {
+    console.error(`Error deleting recipe with ID ${recipeID}:`, err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 export {router as recipesRouter};
 
 
