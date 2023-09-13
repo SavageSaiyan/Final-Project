@@ -56,8 +56,11 @@ function Home() {
 
 
   return (
-  <div>
-      <h1 className="sharingRecipes"> Sharing Recipes</h1>
+    <>
+    <h1 className="sharingRecipes"> Sharing Recipes Wiki</h1>
+    
+  <div className="container-top">
+      
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe._id}>
@@ -82,6 +85,7 @@ function Home() {
         ))}
       </ul>
   </div>
+  </>
   );
 };
 
