@@ -79,7 +79,7 @@ input {
   align-items: center;
   color: white;
   text-decoration: none;
-  animation: fadeIn 1s ease-in-out forwards;
+  animation: fadeIn 2s ease-in-out forwards;
   opacity: 0; /* Initial opacity set to 0 */
 }
 
