@@ -66,7 +66,7 @@ function SavedRecipes() {
         console.error(err);
       }
     };
-  
+  // add the buttons for the saved recipes page
     return (
       <>
       <h1 className="sharingRecipes">Saved Recipes</h1>

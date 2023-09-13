@@ -26,7 +26,7 @@ import mongoose from 'mongoose'
 
 
 // VERSION 1 working
-
+// make the Schema for Recipes
 const RecipesSchema = new mongoose.Schema({
     name: {
         type: String,

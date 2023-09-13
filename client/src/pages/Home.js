@@ -3,13 +3,13 @@ import { useState } from "react";
 import axios from 'axios';
 import {useGetUserID} from '../hooks/useGetUserID'
 import {useCookies} from 'react-cookie'
-
+// Create homepage functionality 
 function Home() {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [cookies, _] = useCookies(["access_token"])
 
-
+// get userID
   const userID = useGetUserID();
   useEffect(() => {
 
@@ -22,7 +22,7 @@ function Home() {
         console.error(err);
       }
     };
-
+// function for going to saved recipes page
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(

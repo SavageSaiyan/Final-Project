@@ -1,17 +1,19 @@
 # Your App Name
-
 This app is a wiki page of recipes. After you login, you can create and add a recipe to the recipe homepage where 
 you can see everyone's recipes. You can also save recipes to your savedRecipes page. You also edit any recipe that you saved and change it for everyone just like a wiki page.
 
 ## Table of Contents
 
 - [Features](#features)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Notes](#Notes)
+
+## Getting Started
+- Trello Board: [Sterling Duncan](https://trello.com/invite/b/QQDSS6hH/ATTIe22011b98ed3260959cd1a6ba5b7980c8748B35B/mern-stack-app)
 
 ## Features
 
@@ -22,23 +24,33 @@ List some key features of your app here.
 - Update recipes that you saved
 - Delete recipes from your saved recipes list
 
+![Screenshot](/client/public/screenshot1.png)
 
-### Prerequisites
+### Technologies Used
 
-List any software or dependencies that users need to install beforehand.
+**Backend : Server** 
+  -  bcrypt
+  -  cors
+  - dotenv
+  -  express
+  -  jsonwebtoken
+  -  mongodb
+  -  mongoose 
+  -   devDependencies: 
+  -  nodemon
 
-- Node.js (version X.X.X)
-- MongoDB (version X.X.X)
-- ...
-
-### Installation
-
-A step-by-step guide on how to install your app.
-
-1. Clone the repository: `git clone https://github.com/yourusername/your-app.git`
-2. Navigate to the project directory: `cd your-app`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
+**Frontend : Client**
+  -  @babel/plugin-proposal-private-property-in-object
+  -  @testing-library/jest-dom
+  -  @testing-library/react
+  -  @testing-library/user-event
+  -  axios
+  -  react
+  -  react-cookie
+  -  react-dom
+  -  react-router-dom
+  -  react-scripts
+  -  web-vitals
 
 ## Usage
 
@@ -48,20 +60,13 @@ After doing so these are all the fuctions you can do while on this app:
 Click on create a recipe button at home page. then fill out all the input fields and then click the 
 "Create Recipe " button at the bottom when you're done to add your recipe to the homepage for everyone to see. Then save whatever recipe you like. If you want to edit a recipe for everyone, save the recipe then go to your saved recipes page. Then click the edit button. Then change the recipe for everyone how you see fit and save the changes. Finally, if you dont want a recipe on your saved recipes page, you can delete that recipe off your page but it will still be on the main home page. 
 
-## Contributing
+## Unsolved Problems
 
-If you would like to contribute to the project, please follow these guidelines.
+- haven't deployed
 
-1. Fork the project.
-2. Create a new branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin feature/your-feature`
-5. Create a pull request.
+## Future Enhancements
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
+- none at this time.
 
 ## Notes
 
