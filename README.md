@@ -34,6 +34,9 @@ List some key features of your app here.
 - Nodemon
 - MongoDB 
 - Insomnia / Postman
+- HTML
+- CSS
+- JavaScript
 
 **Backend : Server** 
   -  bcrypt
