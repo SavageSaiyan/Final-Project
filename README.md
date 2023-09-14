@@ -1,4 +1,4 @@
-# Your App Name
+# Sharing Recipes Wiki 
 This app is a wiki page of recipes. After you login, you can create and add a recipe to the recipe homepage where 
 you can see everyone's recipes. You can also save recipes to your savedRecipes page. You also edit any recipe that you saved and change it for everyone just like a wiki page.
 
