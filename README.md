@@ -27,6 +27,13 @@ List some key features of your app here.
 ![Screenshot](/client/public/screenshot1.png)
 
 ### Technologies Used
+- Mongoose
+- NodeJs
+- Express
+- ReactJs
+- Nodemon
+- MongoDB 
+- Insomnia / Postman
 
 **Backend : Server** 
   -  bcrypt
